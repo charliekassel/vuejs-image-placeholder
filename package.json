@@ -24,6 +24,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "prepublish": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charliekassel/vuejs-image-placeholder"
+  },
+  "bugs": {
+    "url": "https://github.com/charliekassel/vuejs-image-placeholder/issues"
+  },
   "dependencies": {
     "vue": "^2.3.3"
   },

@@ -56,7 +56,15 @@ export default {
       }
     },
     displayText () {
-      return this.showRatio === false ? this.width + 'x' + this.height : '1:' + this.height / this.width
+      return this.showRatio === false ? this.size : this.ratio
+    },
+    size () {
+      return this.width + 'x' + this.height
+    },
+    ratio () {
+      return this.width > this.height
+        ? this.width / this.height + ':' + this.height / this.height
+        : this.width / this.width + ':' + this.height / this.width
     },
     internalWidth () {
       return this.width - (this.borderWidth * 2)

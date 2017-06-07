@@ -63,8 +63,8 @@ export default {
     },
     ratio () {
       return this.width > this.height
-        ? (this.width / this.height) * 100 / 100 + ':' + this.height / this.height
-        : this.width / this.width + ':' + (this.height / this.width) * 100 / 100
+        ? Math.round((this.width / this.height) * 100) / 100 + ':' + this.height / this.height
+        : this.width / this.width + ':' + Math.round((this.height / this.width) * 100) / 100
     },
     internalWidth () {
       return this.width - (this.borderWidth * 2)
@@ -75,8 +75,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

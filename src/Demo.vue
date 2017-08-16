@@ -61,7 +61,6 @@
         :font-family="fontFamily"
         :font-colour="fontColour"
         :font-size="fontSize"
-
       ></image-placeholder>
     </div>
   </div>

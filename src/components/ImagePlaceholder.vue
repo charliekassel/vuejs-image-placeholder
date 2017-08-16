@@ -2,7 +2,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height">
     <rect :x="borderWidth" :y="borderWidth" :width="internalWidth" :height="internalHeight" :style="imgStyle"/>
     <text x="50%" y="50%" :font-size="fontSize" :font-family="fontFamily" :fill="fontColour" text-anchor="middle" alignment-baseline="middle">
-      {{ displayText }}
+      <slot>{{ displayText }}</slot>
     </text>
   </svg>
 </template>

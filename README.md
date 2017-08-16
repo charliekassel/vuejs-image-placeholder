@@ -29,6 +29,13 @@ Basic
 ></image-placeholder>
 ```
 
+By default the image shows the dimensions, using `showRatio` prop the ratio can displayed instead.
+Alternatively you can provide your own text.
+
+```html
+<image-placeholder>My Custom Text</image-placeholder>
+```
+
 
 ## Available props
 

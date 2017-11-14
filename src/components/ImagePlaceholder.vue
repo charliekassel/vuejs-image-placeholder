@@ -1,7 +1,7 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-    <rect :width="imgWidth" :height="imgHeight" :style="imgStyle"/>
-    <text :x="textPosition.x" :y="textPosition.y" :font-size="fontSize" :font-family="fontFamily" :fill="fontColour" text-anchor="middle" alignment-baseline="middle">
+  <svg xmlns="http://www.w3.org/2000/svg" :width="imgWidth" :height="imgHeight">
+    <rect :width="rectWidth" :height="rectHeight" :style="imgStyle"/>
+    <text x="50%" y="50%" :font-size="fontSize" :font-family="fontFamily" :fill="fontColour" text-anchor="middle" alignment-baseline="middle">
       <slot>{{ displayText }}</slot>
     </text>
   </svg>
@@ -50,17 +50,21 @@ export default {
     }
   },
   computed: {
+    /**
+     * @return {Object}
+     */
     imgStyle () {
       return {
         fill: this.backgroundColour,
-        // stroke: this.borderColour,
-        // strokeWidth: this.borderWidth,
         outlineColor: this.borderColour,
         outlineStyle: 'solid',
         outlineWidth: this.borderWidth + 'px',
         outlineOffset: (this.borderWidth * -1) + 'px'
       }
     },
+    /**
+     * @return {String}
+     */
     displayText () {
       return this.showRatio === false ? this.size : this.ratio
     },
@@ -77,6 +81,18 @@ export default {
       return this.percentHeight ? `${this.height}%` : this.height
     },
     /**
+     * @return {Number|String}
+     */
+    rectWidth () {
+      return this.percentWidth ? '100%' : this.width
+    },
+    /**
+     * @return {Number|String}
+     */
+    rectHeight () {
+      return this.percentHeight ? '100%' : this.height
+    },
+    /**
      * Formatted size in pixel
      * @return {String}
      */
@@ -91,20 +107,17 @@ export default {
       const ratio = this.getSimplifiedRatio((this.width / this.height))
       return ratio.x + ':' + ratio.y
     },
-
+    /**
+     * @return {String|Number}
+     */
     internalWidth () {
       return this.percentWidth ? `${this.width}%` : this.width - (this.borderWidth * 2)
     },
+    /**
+     * @return {String|Number}
+     */
     internalHeight () {
       return this.percentHeight ? `${this.height}%` : this.height - (this.borderWidth * 2)
-    },
-    textPosition () {
-      const x = this.percentWidth ? `${this.width / 2}%` : '50%'
-      const y = this.percentHeight ? `${this.height / 2}%` : '50%'
-      return {
-        x: x,
-        y: y
-      }
     }
   },
   methods: {

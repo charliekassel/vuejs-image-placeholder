@@ -1,7 +1,7 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height">
-    <rect :x="borderWidth" :y="borderWidth" :width="internalWidth" :height="internalHeight" :style="imgStyle"/>
-    <text x="50%" y="50%" :font-size="fontSize" :font-family="fontFamily" :fill="fontColour" text-anchor="middle" alignment-baseline="middle">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <rect :width="imgWidth" :height="imgHeight" :style="imgStyle"/>
+    <text :x="textPosition.x" :y="textPosition.y" :font-size="fontSize" :font-family="fontFamily" :fill="fontColour" text-anchor="middle" alignment-baseline="middle">
       <slot>{{ displayText }}</slot>
     </text>
   </svg>
@@ -18,6 +18,8 @@ export default {
       type: Number,
       default: 150
     },
+    percentWidth: Boolean,
+    percentHeight: Boolean,
     backgroundColour: {
       type: String,
       default: '#ccc'
@@ -51,19 +53,35 @@ export default {
     imgStyle () {
       return {
         fill: this.backgroundColour,
-        stroke: this.borderColour,
-        strokeWidth: this.borderWidth
+        // stroke: this.borderColour,
+        // strokeWidth: this.borderWidth,
+        outlineColor: this.borderColour,
+        outlineStyle: 'solid',
+        outlineWidth: this.borderWidth + 'px',
+        outlineOffset: (this.borderWidth * -1) + 'px'
       }
     },
     displayText () {
       return this.showRatio === false ? this.size : this.ratio
     },
     /**
+     * @return {Number|String}
+     */
+    imgWidth () {
+      return this.percentWidth ? `${this.width}%` : this.width
+    },
+    /**
+     * @return {Number|String}
+     */
+    imgHeight () {
+      return this.percentHeight ? `${this.height}%` : this.height
+    },
+    /**
      * Formatted size in pixel
      * @return {String}
      */
     size () {
-      return this.width + 'x' + this.height
+      return this.width + (this.percentWidth ? '%' : '') + 'x' + this.height + (this.percentHeight ? '%' : '')
     },
     /**
      * Formatted ratio
@@ -75,10 +93,18 @@ export default {
     },
 
     internalWidth () {
-      return this.width - (this.borderWidth * 2)
+      return this.percentWidth ? `${this.width}%` : this.width - (this.borderWidth * 2)
     },
     internalHeight () {
-      return this.height - (this.borderWidth * 2)
+      return this.percentHeight ? `${this.height}%` : this.height - (this.borderWidth * 2)
+    },
+    textPosition () {
+      const x = this.percentWidth ? `${this.width / 2}%` : '50%'
+      const y = this.percentHeight ? `${this.height / 2}%` : '50%'
+      return {
+        x: x,
+        y: y
+      }
     }
   },
   methods: {

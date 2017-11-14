@@ -8,7 +8,17 @@
     </div>
     <div>
       <label>
+        <input v-model="percentWidth" type="checkbox"> Width in percent?
+      </label>
+    </div>
+    <div>
+      <label>
         <input v-model.number="height" type="number"> Height
+      </label>
+    </div>
+    <div>
+      <label>
+        <input v-model="percentHeight" type="checkbox"> Height in percent?
       </label>
     </div>
     <!-- Display -->
@@ -53,6 +63,8 @@
     <div>
       <image-placeholder
         :width="width"
+        :percentWidth="percentWidth"
+        :percentHeight="percentHeight"
         :height="height"
         :show-ratio="showRatio"
         :background-colour="backgroundColour"
@@ -75,6 +87,8 @@ export default {
     return {
       width: 300,
       height: 200,
+      percentWidth: false,
+      percentHeight: false,
       showRatio: false,
       backgroundColour: '#eee',
       borderWidth: 1,
